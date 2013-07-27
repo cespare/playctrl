@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+
+  "name": "playctrl",
+  "description": "Playctrl allows you to control Google Play via a small local webserver.",
+  "version": "0.1.0",
+
+  "permissions": [
+    "https://play.google.com/music/"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["https://play.google.com/music/*"],
+      "js": ["contentscript.js"]
+    }
+  ],
+
+  "web_accessible_resources": ["playctrl.js"]
+}
