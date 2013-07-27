@@ -6,30 +6,17 @@ import (
 	"fmt"
 	"net"
 	"os"
+
+	"playctrl"
 )
 
-var (
-	port = flag.Int("port", 49132, "Port to send UDP request")
-
-	cmdNames = map[string]bool{
-		"previous":   true,
-		"playpause":  true,
-		"next":       true,
-		"volumeup":   true,
-		"volumedown": true,
-	}
-)
-
-type Message struct {
-	Version int    `json:"version"`
-	Value   string `json:"value"`
-}
+var port = flag.Int("port", 49132, "Port to send UDP request")
 
 func usage() {
 	fmt.Printf("Usage:\n   $ %s [OPTIONS] CMD\nwhere OPTIONS are\n", os.Args[0])
 	flag.PrintDefaults()
 	commands := []string{}
-	for c := range cmdNames {
+	for c := range playctrl.CmdNames {
 		commands = append(commands, c)
 	}
 	fmt.Printf("and CMD is one of: %v\n", commands)
@@ -48,7 +35,7 @@ func main() {
 		os.Exit(1)
 	}
 	cmd := flag.Arg(0)
-	if !cmdNames[cmd] {
+	if !playctrl.CmdNames[cmd] {
 		usage()
 		os.Exit(1)
 	}
@@ -64,9 +51,9 @@ func main() {
 	}
 	defer c.Close()
 
-	msg := &Message{
-		Version: 1,
-		Value: cmd,
+	msg := &playctrl.Message{
+		Version: playctrl.ProtocolVersion,
+		Value:   cmd,
 	}
 	encoder := json.NewEncoder(c)
 	if err := encoder.Encode(msg); err != nil {

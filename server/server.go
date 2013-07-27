@@ -8,6 +8,8 @@ import (
 	"net"
 	"net/http"
 	"sync"
+
+	"playctrl"
 )
 
 const msgBufSize = 1
@@ -15,15 +17,7 @@ const msgBufSize = 1
 var (
 	clientPort = flag.Int("clientport", 49132, "Port to listen for client UDP requests")
 	chromePort = flag.Int("chromeport", 49133, "Port to send the Chrome extension SSE events.")
-	verbose = flag.Bool("verbose", false, "Turn on verbose logging")
-
-	cmdNames = map[string]bool{
-		"previous":   true,
-		"playpause":  true,
-		"next":       true,
-		"volumeup":   true,
-		"volumedown": true,
-	}
+	verbose    = flag.Bool("verbose", false, "Turn on verbose logging")
 
 	// Response headers for the SSE request.
 	headers = [][2]string{
@@ -38,11 +32,6 @@ var (
 	mu      sync.RWMutex // protects clients
 	clients = make(map[chan []byte]bool)
 )
-
-type Message struct {
-	Version int    `json:"version"`
-	Value   string `json:"value"`
-}
 
 // errorf writes an error to a net.Conn and also log.
 func errorf(c net.Conn, format string, args ...interface{}) {
@@ -59,7 +48,7 @@ func commandServer(addr *net.UDPAddr) error {
 
 	decoder := json.NewDecoder(c)
 	for {
-		msg := &Message{}
+		msg := &playctrl.Message{}
 		if err := decoder.Decode(msg); err != nil {
 			errorf(c, "Invalid client request. Error: %s", err)
 			continue
@@ -73,7 +62,7 @@ func commandServer(addr *net.UDPAddr) error {
 			errorf(c, "Unhandled protocol version: %d", msg.Version)
 			continue
 		}
-		if _, ok := cmdNames[msg.Value]; !ok {
+		if _, ok := playctrl.CmdNames[msg.Value]; !ok {
 			errorf(c, "Invalid command: '%s'", msg.Value)
 			continue
 		}
