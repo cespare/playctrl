@@ -82,7 +82,9 @@ func commandServer(addr *net.UDPAddr) error {
 func processCommands() {
 	for msg := range commands {
 		mu.RLock()
-		log.Printf("Sending message %s to %d connected client(s).", msg, len(clients))
+		if *verbose {
+			log.Printf("Sending message %s to %d connected client(s).", msg, len(clients))
+		}
 		for c := range clients {
 			c <- msg
 		}
