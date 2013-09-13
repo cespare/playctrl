@@ -5,17 +5,14 @@ EXT_SRC=$(shell find extension -type f)
 
 .PHONY: all clean fmt
 
-all: bin/playctrld bin/playctrl extension.zip
+all: bin/playctrl extension.zip
 
 clean:
 	rm -rf bin/*
 	rm -rf extension.zip
 
-bin/playctrld: $(SRC)
-	go build -o bin/playctrld server/server.go
-
 bin/playctrl: $(SRC)
-	go build -o bin/playctrl client/client.go
+	go build -o bin/playctrl
 
 extension.zip: $(EXT_SRC)
 	mkdir ext_compiled
