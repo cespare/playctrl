@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/rpc"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strconv"
 	"sync"
@@ -66,6 +67,13 @@ func launchDaemon() error {
 	path := os.Args[0]
 	if !filepath.IsAbs(path) {
 		path = filepath.Join(cwd, path)
+	}
+	_, err = os.Stat(path)
+	if err != nil {
+		path, err = exec.LookPath("playctrl")
+		if err != nil {
+			fatal("Cannot find playctrl executable.")
+		}
 	}
 	args := []string{os.Args[0], "daemon", "-port", strconv.Itoa(*port)}
 	procattr := &os.ProcAttr{
