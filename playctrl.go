@@ -106,7 +106,10 @@ func runClient(command string) {
 	}
 
 	result := &Nothing{}
-	if command == "stop-daemon" {
+	switch command {
+	case "start-daemon":
+		return // Nothing to do; it's started.
+	case "stop-daemon":
 		if err := client.Call("Server.Shutdown", "", &result); err != nil {
 			fatal(err)
 		}
@@ -248,7 +251,7 @@ func runHTTPServer() {
 func usage() {
 	fmt.Printf("Usage:\n    $ %s [OPTIONS] COMMAND\nwhere OPTIONS are\n", os.Args[0])
 	flag.PrintDefaults()
-	commands := []string{"daemon", "stop-daemon"}
+	commands := []string{"daemon", "start-daemon", "stop-daemon"}
 	for c := range CmdNames {
 		commands = append(commands, c)
 	}
