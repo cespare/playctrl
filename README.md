@@ -26,6 +26,10 @@ You will have to `chmod +x` the file after you've downloaded it, and put it some
 Alternatively, you can build it yourself from a clone of this repo. You'll need to have Go (1.1+) installed.
 Just run `make bin/playctrl` and the binary will be at `bin/playctrl`.
 
+If your Go environment is set up properly, you can use `go get` even more easily:
+
+    $ go get github.com/cespare/playctrl
+
 **Chrome Extension**
 
 You can download the Chrome extension [from the Chrome
