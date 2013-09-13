@@ -12,9 +12,26 @@ Playctrl consists of two pieces: the `playctrl` tool and a Chrome extension. The
 as a daemon and then sends the daemon commands via a unix domain socket. The Chrome extension listens for
 server send events from the server. The server just relays commands through.
 
-## Usage
+## Installation
 
-Convenient downloads and Ubuntu packages coming soon.
+**Tool**
+
+You can download the tool prebuilt for your system (Mac OS or Linux, 64-bit only), at the following urls:
+
+* [Mac OS x64 latest build](http://dl.ctrl-c.us/playctrl-darwin-x64-latest)
+* [Linux x64 latest build](http://dl.ctrl-c.us/playctrl-linux-x64-latest)
+
+You will have to `chmod +x` the file after you've downloaded it, and put it somewhere in your `$PATH`.
+
+Alternatively, you can build it yourself from a clone of this repo. You'll need to have Go (1.1+) installed.
+Just run `make bin/playctrl` and the binary will be at `bin/playctrl`.
+
+**Chrome Extension**
+
+You can download the Chrome extension [from the Chrome
+store](https://chrome.google.com/webstore/detail/playctrl/loakeafbjkkagnmmlpadfmknpeedckjg).
+
+## Usage
 
 Once you've installed the `playctrl` tool and chrome extension, you'll need to reload Google Play so that the
 extension takes effect.
