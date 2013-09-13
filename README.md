@@ -42,8 +42,9 @@ extension takes effect.
 
 You can run, for example, `playctrl playpause` from the commandline to verify that it works.
 
-You can explicitly run `playctrl start-daemon` to start the daemon. You can run `playctrl stop-daemon`
-if you want to make the daemon quit.
+You can explicitly run `playctrl start-daemon` to start the daemon. (You don't need to do this; playctrl
+launches the daemon the first time you run a command.)  You can run `playctrl stop-daemon` if you want to make
+the daemon quit.
 
 You'll want to hook up the shortcuts to global shortcuts in your operating system. For example, I use XFCE
 with Ubuntu, so in the Settings Manager I go to Keyboard -> Application Shortcuts and set `playctrl playpause`
