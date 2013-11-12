@@ -252,8 +252,11 @@ func runHTTPServer() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", handleBrowserListener)
 	sseAddr := fmt.Sprintf("localhost:%d", *port)
-	fmt.Println("Listening on for Chrome extension on", sseAddr)
-	fatal(http.ListenAndServe(sseAddr, mux))
+	fmt.Println("Listening for Chrome extension on", sseAddr)
+	err := http.ListenAndServe(sseAddr, mux)
+	// Delete the socket file if the http server exits.
+	os.Remove(sock)
+	fatal(err)
 }
 
 func usage() {
