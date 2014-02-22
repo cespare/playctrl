@@ -50,6 +50,9 @@ You'll want to hook up the shortcuts to global shortcuts in your operating syste
 with Ubuntu, so in the Settings Manager I go to Keyboard -> Application Shortcuts and set `playctrl playpause`
 to the shortcut `<Primary><Super>space` (that is, ctrl-super-space).
 
+On Mac OS X, you can [create an Automator service and assign a keyboard
+shortcut](http://computers.tutsplus.com/tutorials/how-to-launch-any-app-with-a-keyboard-shortcut--mac-31463).
+
 The commands are:
 
 * previous
