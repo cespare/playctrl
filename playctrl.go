@@ -92,7 +92,12 @@ func runClient(command string) {
 	client, err := rpc.Dial("unix", sock)
 	if err != nil {
 		// Maybe the server isn't started.
-		os.Remove(sock) // Remove the socket if it exists (maybe the server exited uncleanly).
+		// Remove the socket if it exists (maybe the server exited uncleanly).
+		if err := os.Remove(sock); err != nil {
+			if !os.IsNotExist(err) {
+				fatal(err)
+			}
+		}
 		if err := launchDaemon(); err != nil {
 			fatal(err)
 		}
