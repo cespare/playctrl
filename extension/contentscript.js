@@ -2,6 +2,7 @@
 s = document.createElement("script");
 s.src = chrome.extension.getURL("playctrl.js");
 s.onload = function() {
-  return this.parentNode.removeChild(this);
+  this.parentNode.removeChild(this);
+  postMessage({extensionId: chrome.runtime.id, magic: "playctrl"}, "*");
 };
 (document.head || document.documentElement).appendChild(s);

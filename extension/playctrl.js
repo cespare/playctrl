@@ -1,5 +1,3 @@
-extensionId = "jeliedgfmhogehbpolhpokifnefcajog";
-
 msgToKeyCode = {
   "previous": 37,
   "playpause": 32,
@@ -30,8 +28,16 @@ function handleMsg(msg) {
   pressKey(keyCode);
 }
 
-chrome.runtime.connect(extensionId).onMessage.addListener(function(msg, _, _) {
-  console.log("message received")
-  console.log(msg);
-  handleMsg(msg);
-});
+function connect(extensionId) {
+  chrome.runtime.connect(extensionId).onMessage.addListener(function(msg, _, _) {
+    console.log("message received");
+    console.log(msg);
+    handleMsg(msg);
+  });
+}
+
+addEventListener("message", function(e) {
+  if (e.origin === "https://play.google.com" && e.data.magic === "playctrl") {
+    connect(e.data.extensionId);
+  }
+}, false);
