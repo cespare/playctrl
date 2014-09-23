@@ -16,7 +16,15 @@
     }
   ],
 
+  "background": {
+    "scripts": ["background.js"]
+  },
+
   "web_accessible_resources": ["playctrl.js"],
+
+  "externally_connectable": {
+    "matches": ["https://play.google.com/music/*"]
+  },
 
   "icons": {
     "16":  "icon/icon_16.png",

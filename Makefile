@@ -3,7 +3,7 @@ export GOPATH=$(CWD)
 SRC=$(shell find . -type f -name '*.go')
 EXT_SRC=$(shell find extension -type f)
 
-.PHONY: all clean extension fmt
+.PHONY: all clean fmt
 
 all: bin/playctrl extension.zip
 
@@ -14,16 +14,8 @@ clean:
 bin/playctrl: $(SRC)
 	go build -o bin/playctrl
 
-extension: $(EXT_SRC)
-	mkdir ext_compiled
-	cp -r extension/*.json extension/*.coffee extension/icon ext_compiled/
-	coffee -c ext_compiled/*.coffee
-	rm -rf ext_compiled/*.coffee
-	rm -rf ext_compiled/icon/*.xcf
-
 extension.zip: extension
-	zip -r extension.zip ext_compiled/*
-	rm -rf ext_compiled
+	zip -r extension.zip extension/*
 
 fmt: $(SRC)
 	@gofmt -s -l -w $(SRC)

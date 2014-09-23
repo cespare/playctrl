@@ -63,7 +63,7 @@ The commands are:
 
 ## Developing
 
-Build everything via `make` (you'll need Go and Coffeescript installed).
+Build everything via `make` (you'll need Go installed).
 
 Run the tool with `./bin/playctrl`. You can use `-h` to see the options. You can launch the server in the
 foreground with `./bin/playctrl daemon`.
