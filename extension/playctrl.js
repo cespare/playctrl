@@ -1,21 +1,26 @@
 msgToKeyCode = {
-  "previous": 37,
-  "playpause": 32,
-  "next": 39,
-  "volumeup": 187,
-  "volumedown": 189
+  "previous": {code: 37},
+  "playpause": {code: 32},
+  "next": {code: 39},
+  "volumeup": {code: 187},
+  "volumedown": {code: 189},
+  "thumbsup": {code: 187, alt: true},
+  "thumbsdown": {code: 189, alt: true}
 };
 
 function pressKey(k) {
   e = document.createEvent("Events");
   e.initEvent("keydown", true, true);
-  e.keyCode = k;
-  e.which = k;
+  if (k.alt) {
+    e.altKey = true;
+  }
+  e.keyCode = k.code;
+  e.which = k.code;
   document.dispatchEvent(e);
 };
 
 function handleMsg(msg) {
-  if (msg.version !== 1) {
+  if (msg.version > 2) {
     console.warn("playctrl: unhandled protocol version", msg.version);
     return;
   }

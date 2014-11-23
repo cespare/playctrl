@@ -26,10 +26,12 @@ var CmdNames = map[string]bool{
 	"next":       true,
 	"volumeup":   true,
 	"volumedown": true,
+	"thumbsup":   true,
+	"thumbsdown": true,
 }
 
 const (
-	ProtocolVersion = 1
+	ProtocolVersion = 2
 	msgBufSize      = 1
 )
 

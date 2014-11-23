@@ -60,6 +60,8 @@ The commands are:
 * next
 * volumeup
 * volumedown
+* thumbsup
+* thumbsdown
 
 ## Developing
 
