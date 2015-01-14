@@ -1,5 +1,14 @@
 # playctrl
 
+**NOTE: As of Chrome 39, playctrl may not be needed for you because Chome has "global scope" shortcuts!**
+Install the [Google Play Music
+extension](https://chrome.google.com/webstore/detail/google-play-music/fahmaaghhglfmonjliepjlchgpgfmobi) and
+change the shortcuts to your liking by clicking 'Keyboard shortcuts' at the bottom of the extensions page
+(chrome://extensions). See [this](https://plus.google.com/+FrancoisBeaufort/posts/SDDSiLV5WVF) and
+[this](http://www.omgchrome.com/keyboard-control-scope-chrome-extensions/) for more info.
+
+---
+
 Playctrl is a combination of a commandline tool and a chrome extension to enable you control Google Play
 (Music) from your desktop.
 
